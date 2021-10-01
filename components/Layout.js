@@ -10,13 +10,18 @@ function Layout({children}) {
             </Head>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography>ShopSwift
+                    <Typography >ShopSwift
                     </Typography>
                 </Toolbar>
             </AppBar>
             <Container>
                 {children}
             </Container>
+            <footer>
+                <Typography>
+                    @All Rights Reserved. Shop Swift 2022 
+                </Typography>
+            </footer>
         </div>
 
     )
