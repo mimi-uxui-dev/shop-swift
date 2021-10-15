@@ -15,7 +15,7 @@ function productScreen() {
     }
 
     return (
-        <Layout title={product.name}>
+        <Layout title={product.name} description={product.description} >
             
             <NextLink href='/' passHref>
                 Go back home
@@ -28,9 +28,11 @@ function productScreen() {
                     height={640}
                     layout="responsive"
                 ></Image>
-
                 <div>
-                    
+                    <h3 className='text-2xl'>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <p>$ {product.price}</p>
+                    <button>Add to Cart</button>
                 </div>
 
             </main>

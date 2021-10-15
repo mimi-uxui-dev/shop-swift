@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Head from "next/head"
 import NextLink from "next/link"
-import ProductsList from './ProductsList'
+import { Store } from '../utils/Store'
+import  {useTheme}  from 'next-themes'
 
-function Layout({ tiitle, children }) {
+function Layout({ tiitle, children, description }) {
+    const { state, dispatch } = useContext(Store)
+    const { darkMode } = state
+   
+    const {systemTheme, theme, setTheme} = useTheme()
+
+    const renderThemeChanger = () => {
+        const currentTheme = theme === 'system' ? systemTheme : theme
+        if (currentTheme === 'dark') {
+            return <button onClick={() => setTheme('light')}>Light</button>
+        } else {
+            return <button onClick={() => setTheme('dark')}>Dark</button>
+        }
+    }
 
     return (
         <div>
             <Head>
                 <title> {tiitle} - Shop Swift</title>
+                {description && <meta name="description" content={description} > </meta>}
             </Head>
 
             <nav className="bg-gray-800">
@@ -43,6 +58,7 @@ function Layout({ tiitle, children }) {
                                         Login
                                     </NextLink>
 
+                                    {renderThemeChanger()}
 
                                 </div>
                             </div>
@@ -132,7 +148,6 @@ function Layout({ tiitle, children }) {
                 </div>
             </footer>
         </div>
-
     )
 }
 
