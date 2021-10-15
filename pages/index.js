@@ -1,17 +1,9 @@
-
 import Layout from '../components/Layout'
-
+import ProductsList from '../components/ProductsList'
 export default function Home() {
   return (
-    <Layout>
-      <div>
-        <h1>Products</h1>
-        <ul>
-          <li>Product 01</li>
-          <li>Product 02</li>
-          <li>Product 03</li>
-        </ul>
-      </div>
+    <Layout tiitle={"H0me"}>
+      <ProductsList />
     </Layout>
   )
 }

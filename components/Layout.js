@@ -1,13 +1,14 @@
 import React from 'react'
 import Head from "next/head"
-import data from "../utils/data"
+import NextLink from "next/link"
+import ProductsList from './ProductsList'
 
-function Layout({ children }) {
+function Layout({ tiitle, children }) {
 
     return (
         <div>
             <Head>
-                <title>Shop Swift</title>
+                <title> {tiitle} - Shop Swift</title>
             </Head>
 
             <nav className="bg-gray-800">
@@ -35,13 +36,14 @@ function Layout({ children }) {
                             <div className="hidden sm:block sm:ml-6">
                                 <div className="flex space-x-4">
 
-                                    <a href="#" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                                    <NextLink href="/cart" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                        Cart
+                                    </NextLink>
+                                    <NextLink href="" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                        Login
+                                    </NextLink>
 
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
 
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
                                 </div>
                             </div>
                         </div>
@@ -90,31 +92,7 @@ function Layout({ children }) {
             </nav>
 
             <main className="min-h-screen max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-               
-                <div className="grid grid-cols-2 justify-items-center mx-auto">
-                    {data.products.map(product =>
-                        <div className="py-4">
-                            <div className="flex bg-white shadow-lg rounded-md overflow-hidden" style={{width: "550px", height:"300px"}}>
-                                <div className="w-1/2 bg-cover" style={{ backgroundImage: `url(${product.image})` }}>
-                                </div>
-                                <div className=" w-1/2 p-4 flex justify-center flex-col">
-                                    <h1 className="text-gray-900 font-bold text-xl">{product.name}</h1>
-                                    <p className="mt-2 text-gray-600 text-sm">{product.description}</p>
-                                    <div className="flex item-center items-center gap-2 mt-2">
-                                        {product.numReviews}
-                                        <svg className="w-4 h-4 fill-current text-gray-700" viewBox="0 0 24 24">
-                                            <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                                        </svg>
-                                    </div>
-                                    <div className="flex item-center justify-between mt-3">
-                                        <h1 className="text-gray-700 font-bold text-xl">${product.price}</h1>
-                                        <button className="px-3 py-2 bg-green-400 text-white text-xs font-bold uppercase rounded">Add to Card</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                {children}
             </main>
 
             <footer className="footer bg-white relative pt-1 bg-gray-200">

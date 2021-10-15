@@ -9,7 +9,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 20,
-            description: "Awsome shirt. No cap!"
+            description: "Awsome shirt. No cap!",
+            slug: "Shirt-XYT"
         },
         {
             name: "Fit Shirt 900", 
@@ -20,7 +21,8 @@ const data = {
             rating: 2.5,
             numReviews: 12,
             countInStock: 10,
-            description: "Fit shirt !"
+            description: "Fit shirt !",
+            slug: "Fit-Shirt-900"
         },{
             name: "Slim Shirt 785", 
             category : "Shirts",
@@ -30,7 +32,8 @@ const data = {
             rating: 1.5,
             numReviews: 15,
             countInStock: 15,
-            description: "Fit Awsome shirt. No cap!"
+            description: "Fit Awsome shirt. No cap!",
+            slug: "Slim-Shirt-785"
         },{
             name: "Pants XYT", 
             category : "Pants",
@@ -40,7 +43,8 @@ const data = {
             rating: 3.5,
             numReviews: 100,
             countInStock: 50,
-            description: "Awsome Pants. No cap!"
+            description: "Awsome Pants. No cap!",
+            slug: "Pants-XYT"
         },{
             name: "Classic Pants", 
             category : "Pants",
@@ -50,7 +54,8 @@ const data = {
             rating: 5.0,
             numReviews: 100,
             countInStock: 200,
-            description: "Classic Pants.Yes, you can get married in those."
+            description: "Classic Pants.Yes, you can get married in those.",
+            slug: "Classic-Pants"
         },{
             name: "Day To Day Pants", 
             category : "Pants",
@@ -60,7 +65,8 @@ const data = {
             rating: 4.0,
             numReviews: 7,
             countInStock: 1,
-            description: "Wear these every day!"
+            description: "Wear these every day!",
+            slug: "Day-To-Day-Pants"
         }
     ]
 }
