@@ -6,7 +6,7 @@ function ProductsList() {
     return (
         <div className="grid grid-cols-2 justify-items-center mx-auto">
         {data.products.map(product =>
-            <div className="py-4">
+            <div key={product.slug} className="py-4">
                 <div className="flex bg-white shadow-lg rounded-md overflow-hidden" style={{ width: "550px", height: "300px" }}>
                     <div className="w-1/2 bg-cover" style={{ backgroundImage: `url(${product.image})` }}>
                     </div>

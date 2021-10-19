@@ -1,16 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Head from "next/head"
 import NextLink from "next/link"
 import { Store } from '../utils/Store'
 import  {useTheme}  from 'next-themes'
 
 function Layout({ tiitle, children, description }) {
-    const { state, dispatch } = useContext(Store)
-    const { darkMode } = state
+ /*    const { state, dispatch } = useContext(Store)
+    const { darkMode } = state */
    
     const {systemTheme, theme, setTheme} = useTheme()
 
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+     }, [])
+
     const renderThemeChanger = () => {
+        if(!mounted) return null
+
         const currentTheme = theme === 'system' ? systemTheme : theme
         if (currentTheme === 'dark') {
             return <button onClick={() => setTheme('light')}>Light</button>
@@ -19,14 +27,15 @@ function Layout({ tiitle, children, description }) {
         }
     }
 
+  
     return (
-        <div>
+        <div className=''>
             <Head>
                 <title> {tiitle} - Shop Swift</title>
                 {description && <meta name="description" content={description} > </meta>}
             </Head>
 
-            <nav className="bg-gray-800">
+            <nav className="dark:bg-red-600">
                 <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -35,11 +44,11 @@ function Layout({ tiitle, children, description }) {
                                 <span className="sr-only">Open main menu</span>
 
                                 <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
 
                                 <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
@@ -68,7 +77,7 @@ function Layout({ tiitle, children, description }) {
                                 <span className="sr-only">View notifications</span>
 
                                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
                             </button>
 
