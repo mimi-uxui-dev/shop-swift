@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {useRouter} from "next/router"
 import data from "../../utils/data"
 import Layout from '../../components/Layout'
@@ -6,16 +6,27 @@ import NextLink from "next/link"
 import Image from 'next/image'
 import db from '../../utils/db'
 import Product from '../../models/Product'
+import axios from 'axios'
+import { Store } from '../../utils/Store'
 
 export default function productScreen(props) {
-
     const {product} = props 
+    const {state, dispatch} = useContext(Store)
     //const router = useRouter()
     //const {slug} = router.query
     //const product = data.products.find(a => a.slug === slug)
 
     if(!product){
         return <div>Product N0t Found</div>
+    }
+
+    const addToCartHandler =  async () => {
+        const {data} = await axios.get(`/api/products/${product._id}`)
+        if(data.countInStock <= 0){
+            window.alert('Sorry. Product out of Stock')
+            return
+        }
+        dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity: 1 } })
     }
 
     return (
@@ -36,7 +47,7 @@ export default function productScreen(props) {
                     <h3 className='text-2xl'>{product.name}</h3>
                     <p>{product.description}</p>
                     <p>$ {product.price}</p>
-                    <button>Add to Cart</button>
+                    <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
 
             </main>

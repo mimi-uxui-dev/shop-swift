@@ -2,23 +2,22 @@ import React, { useContext, useState, useEffect } from 'react'
 import Head from "next/head"
 import NextLink from "next/link"
 import { Store } from '../utils/Store'
-import  {useTheme}  from 'next-themes'
+import { useTheme } from 'next-themes'
 
 function Layout({ tiitle, children, description }) {
- /*    const { state, dispatch } = useContext(Store)
-    const { darkMode } = state */
-   
-    const {systemTheme, theme, setTheme} = useTheme()
+    const { state, dispatch } = useContext(Store)
+    const { cart } = state 
+
+    const { systemTheme, theme, setTheme } = useTheme()
 
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
         setMounted(true)
-     }, [])
+    }, [])
 
     const renderThemeChanger = () => {
-        if(!mounted) return null
-
+        if (!mounted) return null
         const currentTheme = theme === 'system' ? systemTheme : theme
         if (currentTheme === 'dark') {
             return <button onClick={() => setTheme('light')}>Light</button>
@@ -26,8 +25,9 @@ function Layout({ tiitle, children, description }) {
             return <button onClick={() => setTheme('dark')}>Dark</button>
         }
     }
+    
+    // console.log('cart ----------------------------------------------------------> ' , cart)
 
-  
     return (
         <div className=''>
             <Head>
@@ -39,14 +39,11 @@ function Layout({ tiitle, children, description }) {
                 <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-
                             <button type="button" className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
-
                                 <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
-
                                 <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -59,16 +56,17 @@ function Layout({ tiitle, children, description }) {
                             </div>
                             <div className="hidden sm:block sm:ml-6">
                                 <div className="flex space-x-4">
-
-                                    <NextLink href="/cart" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
-                                        Cart
-                                    </NextLink>
+                                    <div className=" relative top-0 left-0 ">
+                                        <NextLink href="/cart" className="bg-gray-900 w-10 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                            Cart
+                                        </NextLink>
+                                        <br />
+                                        <span className="border-0 w-9 bg-red-500 text-white text-xs p-0.5" > {cart.cartItems.length} </span>  
+                                    </div>
                                     <NextLink href="" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
                                         Login
                                     </NextLink>
-
                                     {renderThemeChanger()}
-
                                 </div>
                             </div>
                         </div>
