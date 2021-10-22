@@ -4,11 +4,15 @@ import data from "../../utils/data"
 import Layout from '../../components/Layout'
 import NextLink from "next/link"
 import Image from 'next/image'
+import db from '../../utils/db'
+import Product from '../../models/Product'
 
-function productScreen() {
-    const router = useRouter()
-    const {slug} = router.query
-    const product = data.products.find(a => a.slug === slug)
+export default function productScreen(props) {
+
+    const {product} = props 
+    //const router = useRouter()
+    //const {slug} = router.query
+    //const product = data.products.find(a => a.slug === slug)
 
     if(!product){
         return <div>Product N0t Found</div>
@@ -40,4 +44,18 @@ function productScreen() {
     )
 }
 
-export default productScreen
+
+export async function getServerSideProps(context){
+    const {params} = context
+    const { slug } = params
+
+    await db.connect()
+    const product = await Product.findOne({slug}).lean()
+    await db.disconnect()
+
+    return {
+      props: {
+        product: db.convertDocToObj(product)
+      }
+    }
+}
