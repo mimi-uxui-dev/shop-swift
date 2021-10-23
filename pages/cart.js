@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
+import dynamic from "next/dynamic"
 import Layout from '../components/Layout'
 import { Store } from '../utils/Store'
 import NextLink from "next/link"
 import Image from "next/image"
 
-export default function cartScreen() {
+function cartScreen() {
     const { state } = useContext(Store)
     const { cart } = state
 
     return (
         <Layout>
-           
                 <div>
                     {
                         cart.cartItems.length === 0 ? (<div>Cart is empty. <NextLink href="/">Go Shopping</NextLink></div>) : (
@@ -74,3 +74,6 @@ export default function cartScreen() {
         </Layout>
     )
 }
+
+
+export default dynamic(() => Promise.resolve(cartScreen), {ssr: false})
